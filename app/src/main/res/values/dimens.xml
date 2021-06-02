@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="movie_item_size_height">350dp</dimen>
+    <dimen name="star_size">60dp</dimen>
+    <dimen name="marge_mediun">16dp</dimen>
+</resources>
