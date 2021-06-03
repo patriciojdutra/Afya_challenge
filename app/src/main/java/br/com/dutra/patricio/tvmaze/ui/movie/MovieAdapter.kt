@@ -9,11 +9,12 @@ import android.widget.LinearLayout
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import br.com.dutra.patricio.tvmaze.R
-import br.com.dutra.patricio.tvmaze.model.Show
+import br.com.dutra.patricio.tvmaze.extensions.load
+import br.com.dutra.patricio.tvmaze.model.Movie
 import com.squareup.picasso.Picasso
 import java.lang.Exception
 
-class MovieAdapter constructor(val contex: Context, var list: ArrayList<Show>) : RecyclerView.Adapter<MovieAdapter.MovieHolder>() {
+class MovieAdapter constructor(val contex: Context, var list: ArrayList<Movie>) : RecyclerView.Adapter<MovieAdapter.MovieHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MovieHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.movie_list_item, parent,false)
@@ -26,10 +27,7 @@ class MovieAdapter constructor(val contex: Context, var list: ArrayList<Show>) :
 
         val item = list[position]
 
-        try {
-            Picasso.get().load(item.image.original).into(holder.movie_image);
-        }catch (e:Exception){}
-
+        holder.movie_image.load(item.image.original)
 
         if(item.isFavorite)
             holder.movie_favorite.setImageResource(android.R.drawable.star_big_on)

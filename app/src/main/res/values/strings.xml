@@ -2,6 +2,7 @@
     <string name="app_name">Tv Maze</string>
     <string name="Warning">Atenção</string>
     <string name="Continue">Continuar</string>
+    <string name="close_app">Fechar aplicativo</string>
     <string name="favorite_movie">Filme favorito</string>
     <string name="movie">Filmes</string>
 </resources>

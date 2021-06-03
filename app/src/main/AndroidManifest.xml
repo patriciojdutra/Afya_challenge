@@ -11,8 +11,9 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
+        android:name=".MyApplication"
         android:theme="@style/Theme.TvMaze">
-        <activity android:name=".ui.movie.MovieListActivity"></activity>
+        <activity android:name=".ui.movie.MovieListActivity" />
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

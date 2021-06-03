@@ -3,7 +3,7 @@ package br.com.dutra.patricio.tvmaze.model
 import android.os.Parcelable
 import com.google.gson.annotations.SerializedName
 
-data class Show(
+data class Movie(
     @SerializedName("id") var id : Int,
     @SerializedName("url") var url : String,
     @SerializedName("name") var name : String,

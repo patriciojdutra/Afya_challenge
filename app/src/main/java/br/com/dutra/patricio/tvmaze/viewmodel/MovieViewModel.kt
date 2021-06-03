@@ -2,36 +2,39 @@ package br.com.dutra.patricio.tvmaze.viewmodel
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import br.com.dutra.patricio.tvmaze.data.service.Retrofit
-import br.com.dutra.patricio.tvmaze.model.Show
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
+import br.com.dutra.patricio.tvmaze.data.repository.MovieRepository
+import br.com.dutra.patricio.tvmaze.extensions.addAllValue
+import br.com.dutra.patricio.tvmaze.model.Movie
+import io.reactivex.disposables.CompositeDisposable
 
+class MovieViewModel(var movieRepository: MovieRepository) : ViewModel() {
 
-class MovieViewModel: ViewModel() {
+    var compositeDisposable = CompositeDisposable()
+    var movieList = MutableLiveData<ArrayList<Movie>>()
+    var loading = MutableLiveData<Boolean>()
+    var errorMessage = MutableLiveData<String>()
+    var pageSelected = 0
 
-    var movie_list = MutableLiveData<ArrayList<Show>>()
+    fun getMovies(){
+        compositeDisposable.add(movieRepository.getMovieList(pageSelected)
+            .doOnSubscribe {
+                pageSelected++
+                if(pageSelected > 1)
+                    loading.value = true
+            }.subscribe ({
+                movieList.addAllValue(it)
+                loading.value = false
+            },{
+                loading.value = false
+                if(it.message != null)
+                    errorMessage.value = it.message
+            })
+        )
+    }
 
-    fun getMovies(page: Int){
-
-        val cal = Retrofit().endpoint.getShows(page)
-
-        cal.enqueue(object : Callback<List<Show>> {
-
-            override fun onResponse(call: Call<List<Show>>, response: Response<List<Show>>) {
-
-                if (response.isSuccessful && response.body() != null) {
-                    movie_list.value = response.body() as ArrayList<Show>
-                } else {
-                    "//resposta.sucesso(NoticiasRetorno(response.errorBody()?.string().toString()))"
-                }
-            }
-
-            override fun onFailure(result: Call<List<Show>>, t: Throwable) {
-                "//resposta.sucesso(NoticiasRetorno(t.message.toString()))"
-            }
-        })
+    override fun onCleared() {
+        compositeDisposable.clear()
+        super.onCleared()
     }
 
 }

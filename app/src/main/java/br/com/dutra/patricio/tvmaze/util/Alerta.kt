@@ -13,12 +13,12 @@ class Alerta {
         lateinit var dialog: Dialog
 
         @JvmStatic
-        fun aviso(msg: String, act: Activity) {
+        fun aviso(msg: String, act: Activity, onClick:() -> Unit) {
 
             val builder = AlertDialog.Builder(act)
             builder.setTitle(R.string.Warning)
             builder.setMessage(msg)
-            builder.setPositiveButton(R.string.Continue, DialogInterface.OnClickListener { dialog, which ->  dialog.dismiss()})
+            builder.setPositiveButton(R.string.close_app) { dialog, which -> onClick() }
             builder.setCancelable(true)
             dialog = builder.create()
             dialog.show()

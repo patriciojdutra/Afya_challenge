@@ -4,7 +4,8 @@ class Constants {
 
     companion object {
 
-        val URLSERVER = "https://api.tvmaze.com/"
+        const val minimumNumberOfPagesToUpdateList = 1
+
 
     }
 }
