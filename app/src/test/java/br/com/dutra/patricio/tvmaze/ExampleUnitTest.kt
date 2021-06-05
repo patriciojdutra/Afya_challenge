@@ -1,5 +1,6 @@
 package br.com.dutra.patricio.tvmaze
 
+import br.com.dutra.patricio.tvmaze.util.Constants
 import org.junit.Test
 
 import org.junit.Assert.*

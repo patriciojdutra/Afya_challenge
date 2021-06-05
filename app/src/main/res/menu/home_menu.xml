@@ -8,9 +8,4 @@
         android:title="@string/favorite_movie"
         app:showAsAction="always" />
 
-    <item
-        android:id="@+id/action_movie"
-        android:title="@string/movie"
-        app:showAsAction="always" />
-
 </menu>

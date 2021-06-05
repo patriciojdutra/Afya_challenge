@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <dimen name="movie_item_size_height">350dp</dimen>
-    <dimen name="star_size">60dp</dimen>
+    <dimen name="star_size">40dp</dimen>
     <dimen name="marge_mediun">16dp</dimen>
+    <dimen name="title_movie_marge_top">16dp</dimen>
+    <dimen name="title_movie_marge_bottom">16dp</dimen>
+    <dimen name="title_movie_size_text">18sp</dimen>
 </resources>

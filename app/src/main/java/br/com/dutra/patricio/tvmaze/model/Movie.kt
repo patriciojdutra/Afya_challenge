@@ -2,6 +2,7 @@ package br.com.dutra.patricio.tvmaze.model
 
 import android.os.Parcelable
 import com.google.gson.annotations.SerializedName
+import java.io.Serializable
 
 data class Movie(
     @SerializedName("id") var id : Int,
@@ -9,13 +10,13 @@ data class Movie(
     @SerializedName("name") var name : String,
     @SerializedName("type") var type : String,
     @SerializedName("language") var language : String,
-    //@SerializedName("genres") var genres : List<String>,
+    @SerializedName("genres") var genres : List<String>,
     @SerializedName("status") var status : String,
     @SerializedName("runtime") var runtime : Int,
     @SerializedName("averageRuntime") var averageRuntime : Int,
     @SerializedName("premiered") var premiered : String,
     @SerializedName("officialSite") var officialSite : String,
-    //@SerializedName("schedule") var schedule : Schedule,
+    @SerializedName("schedule") var schedule : Schedule,
     //@SerializedName("rating") var rating : Rating,
     @SerializedName("weight") var weight : Int,
     //@SerializedName("network") var network : Network,
@@ -27,49 +28,49 @@ data class Movie(
     var isFavorite: Boolean = false
     //@SerializedName("updated") var updated : Int,
     //@SerializedName("_links") var Links : Links
-)
+):Serializable
 
 data class Schedule (
     @SerializedName("time") var time : String,
     @SerializedName("days") var days : List<String>
-)
-
-data class Rating (
-    @SerializedName("average") var average : String
-)
-
-data class Country (
-    @SerializedName("name") var name : String,
-    @SerializedName("code") var code : String,
-    @SerializedName("timezone") var timezone : String
-)
-
-data class Network (
-    @SerializedName("id") var id : Int,
-    @SerializedName("name") var name : String,
-    @SerializedName("country") var country : Country
-)
-
-data class Externals (
-    @SerializedName("tvrage") var tvrage : String,
-    @SerializedName("thetvdb") var thetvdb : Int,
-    @SerializedName("imdb") var imdb : String
-)
+):Serializable
+//
+//data class Rating (
+//    @SerializedName("average") var average : String
+//)
+//
+//data class Country (
+//    @SerializedName("name") var name : String,
+//    @SerializedName("code") var code : String,
+//    @SerializedName("timezone") var timezone : String
+//)
+//
+//data class Network (
+//    @SerializedName("id") var id : Int,
+//    @SerializedName("name") var name : String,
+//    @SerializedName("country") var country : Country
+//)
+//
+//data class Externals (
+//    @SerializedName("tvrage") var tvrage : String,
+//    @SerializedName("thetvdb") var thetvdb : Int,
+//    @SerializedName("imdb") var imdb : String
+//)
 
 data class Image (
     @SerializedName("medium") var medium : String,
     @SerializedName("original") var original : String
-)
+):Serializable
 
-data class Self (
-    @SerializedName("href") var href : String
-)
-
-data class Previousepisode (
-    @SerializedName("href") var href : String
-)
-
-data class Links (
-    @SerializedName("self") var self : Self,
-    @SerializedName("previousepisode") var previousepisode : Previousepisode
-)
+//data class Self (
+//    @SerializedName("href") var href : String
+//)
+//
+//data class Previousepisode (
+//    @SerializedName("href") var href : String
+//)
+//
+//data class Links (
+//    @SerializedName("self") var self : Self,
+//    @SerializedName("previousepisode") var previousepisode : Previousepisode
+//)

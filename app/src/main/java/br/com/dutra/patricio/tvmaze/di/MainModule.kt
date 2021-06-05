@@ -4,6 +4,7 @@ import br.com.dutra.patricio.tvmaze.data.datasource.MovieDataSource
 import br.com.dutra.patricio.tvmaze.data.datasource.MovieDataSourceImpl
 import br.com.dutra.patricio.tvmaze.data.repository.MovieRepository
 import br.com.dutra.patricio.tvmaze.data.repository.MovieRepositoryImpl
+import br.com.dutra.patricio.tvmaze.viewmodel.MovieDetailsViewModel
 import br.com.dutra.patricio.tvmaze.viewmodel.MovieViewModel
 import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.dsl.module
@@ -18,6 +19,12 @@ val mainModule = module {
 
     viewModel {
         MovieViewModel(
+            movieRepository = get()
+        )
+    }
+
+    viewModel {
+        MovieDetailsViewModel(
             movieRepository = get()
         )
     }
