@@ -1,6 +1,7 @@
 plugins {
     id 'com.android.application'
     id 'kotlin-android'
+    id 'kotlin-kapt'
 }
 
 android {
@@ -34,8 +35,8 @@ android {
     buildFeatures {
         viewBinding true
     }
-
 }
+
 
 dependencies {
 
@@ -79,4 +80,22 @@ dependencies {
     implementation "io.insert-koin:koin-androidx-viewmodel:2.2.3"
     implementation "io.insert-koin:koin-androidx-ext:2.2.3"
 
+    //Biometria
+    implementation "androidx.biometric:biometric:1.1.0"
+
+    //Room
+    def room_version = "2.3.0"
+    implementation "androidx.room:room-runtime:$room_version"
+    // To use Kotlin annotation processing tool (kapt)
+    kapt "androidx.room:room-compiler:$room_version"
+    // To use Kotlin Symbolic Processing (KSP)
+    //ksp "androidx.room:room-compiler:$room_version"
+    // optional - Test helpers
+    testImplementation "androidx.room:room-testing:$room_version"
+    implementation "org.jetbrains.kotlinx:kotlinx-serialization-json:1.0.1"
+
+}
+
+repositories {
+    mavenCentral()
 }

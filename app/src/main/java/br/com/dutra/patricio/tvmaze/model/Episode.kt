@@ -1,8 +1,9 @@
 package br.com.dutra.patricio.tvmaze.model
 
 import com.google.gson.annotations.SerializedName
+import java.io.Serializable
 
-data class Episodes (
+data class Episode (
 
     @SerializedName("id") var id : Int,
     @SerializedName("url") var url : String,
@@ -16,4 +17,8 @@ data class Episodes (
     @SerializedName("runtime") var runtime : Int,
     @SerializedName("image") var image : Image,
     @SerializedName("summary") var summary : String,
-)
+    var movieName : String
+
+
+
+): Serializable

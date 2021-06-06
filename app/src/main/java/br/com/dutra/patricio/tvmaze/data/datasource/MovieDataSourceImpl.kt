@@ -1,7 +1,7 @@
 package br.com.dutra.patricio.tvmaze.data.datasource
 
 import br.com.dutra.patricio.tvmaze.data.service.Retrofit
-import br.com.dutra.patricio.tvmaze.model.Episodes
+import br.com.dutra.patricio.tvmaze.model.Episode
 import br.com.dutra.patricio.tvmaze.model.Movie
 import br.com.dutra.patricio.tvmaze.model.SearchMovie
 import io.reactivex.Observable
@@ -16,7 +16,7 @@ class MovieDataSourceImpl : MovieDataSource {
         return Retrofit().endpoint.getSearchedMovieList(query)
     }
 
-    override fun getEpisodes(id: Int): Observable<List<Episodes>> {
+    override fun getEpisodes(id: Int): Observable<List<Episode>> {
         return Retrofit().endpoint.getEpisodes(id)
     }
 }

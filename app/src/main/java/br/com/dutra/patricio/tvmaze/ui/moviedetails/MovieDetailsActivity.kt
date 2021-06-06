@@ -1,10 +1,9 @@
 package br.com.dutra.patricio.tvmaze.ui.moviedetails
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
 import android.widget.Button
 import android.widget.LinearLayout
 import android.widget.TextView
@@ -12,9 +11,10 @@ import android.widget.Toast
 import br.com.dutra.patricio.tvmaze.R
 import br.com.dutra.patricio.tvmaze.databinding.ActivityMovieDetailsBinding
 import br.com.dutra.patricio.tvmaze.extensions.load
-import br.com.dutra.patricio.tvmaze.extensions.setVisible
-import br.com.dutra.patricio.tvmaze.model.Episodes
+import br.com.dutra.patricio.tvmaze.model.Episode
 import br.com.dutra.patricio.tvmaze.model.Movie
+import br.com.dutra.patricio.tvmaze.ui.episode.EpisodeActivity
+import br.com.dutra.patricio.tvmaze.ui.movie.MovieListActivity
 import br.com.dutra.patricio.tvmaze.util.Alerta
 import br.com.dutra.patricio.tvmaze.viewmodel.MovieDetailsViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -50,12 +50,12 @@ class MovieDetailsActivity : AppCompatActivity() {
 
         binding.imgViewMovieDetails.load(movie.image.original, this)
 
-        var time = ""
+        var time: String
         movie.schedule.let { schedule ->
-            schedule.time.let {time = " - $it"}
-            schedule.days.let { days ->
-                days.forEach {
-                    var textView = TextView(this)
+            schedule?.time.let {time = " - $it"}
+            schedule?.days.let { days ->
+                days?.forEach {
+                    val textView = TextView(this)
                     textView.text = "$it$time"
                     binding.layoutSchedule.addView(textView)
                 }
@@ -64,14 +64,14 @@ class MovieDetailsActivity : AppCompatActivity() {
 
         movie.genres.let { genres ->
             genres.forEach {
-                var textView = TextView(this)
+                val textView = TextView(this)
                 textView.text = it
                 binding.layoutGenres.addView(textView)
             }
         }
 
         movie.summary.let {
-            var textView = TextView(this)
+            val textView = TextView(this)
             textView.text = it
             binding.layoutSummary.addView(textView)
         }
@@ -89,7 +89,7 @@ class MovieDetailsActivity : AppCompatActivity() {
 
     }
 
-    private fun loadSeason(list: ArrayList<Episodes>?) {
+    private fun loadSeason(list: ArrayList<Episode>?) {
 
         val maxSeason = list?.maxByOrNull { e -> e.season }
         val quantSeason = maxSeason?.season?:0
@@ -107,6 +107,10 @@ class MovieDetailsActivity : AppCompatActivity() {
                 viewEpisode.findViewById<TextView>(R.id.txtNameEpisode).text = "${episode.number} ${episode.name}"
                 viewEpisode.findViewById<Button>(R.id.btnWatch).setOnClickListener {
                     Toast.makeText(this, episode.name, Toast.LENGTH_LONG ).show()
+                    episode.movieName = movie.name
+                    var intent  = Intent(this, EpisodeActivity::class.java)
+                    intent.putExtra("episode",episode)
+                    startActivity(intent)
                 }
 
                 view.findViewById<LinearLayout>(R.id.layoutEpisodes).addView(viewEpisode)

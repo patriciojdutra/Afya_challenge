@@ -1,7 +1,7 @@
 package br.com.dutra.patricio.tvmaze.data.repository
 
 import br.com.dutra.patricio.tvmaze.data.datasource.MovieDataSource
-import br.com.dutra.patricio.tvmaze.model.Episodes
+import br.com.dutra.patricio.tvmaze.model.Episode
 import br.com.dutra.patricio.tvmaze.model.Movie
 import br.com.dutra.patricio.tvmaze.model.SearchMovie
 import io.reactivex.Observable
@@ -22,7 +22,7 @@ class MovieRepositoryImpl(private var movieDataSource: MovieDataSource) : MovieR
                 .subscribeOn(Schedulers.io())
     }
 
-    override fun getEpisodes(id: Int): Observable<List<Episodes>> {
+    override fun getEpisodes(id: Int): Observable<List<Episode>> {
         return movieDataSource.getEpisodes(id)
             .observeOn(AndroidSchedulers.mainThread())
             .subscribeOn(Schedulers.io())

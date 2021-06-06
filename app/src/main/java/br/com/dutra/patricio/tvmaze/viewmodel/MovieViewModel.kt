@@ -1,12 +1,14 @@
 package br.com.dutra.patricio.tvmaze.viewmodel
 
 import android.app.DownloadManager
+import android.content.Context
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import br.com.dutra.patricio.tvmaze.data.repository.MovieRepository
 import br.com.dutra.patricio.tvmaze.extensions.addAllValue
 import br.com.dutra.patricio.tvmaze.model.Movie
 import br.com.dutra.patricio.tvmaze.model.SearchMovie
+import com.example.botacontra.banco.DataBase
 import io.reactivex.disposables.CompositeDisposable
 
 class MovieViewModel(var movieRepository: MovieRepository) : ViewModel() {
@@ -24,7 +26,7 @@ class MovieViewModel(var movieRepository: MovieRepository) : ViewModel() {
                 pageSelected++
                 loading.value = true
             }.subscribe ({
-                var filterList = it.filter { movie -> movie.image != null && !movie.name.isNullOrEmpty() }
+                var filterList = it.filter { movie -> movie.name.isNotEmpty() }
                 if(isFilter){
                     isFilter = false
                     movieList.value = it as ArrayList<Movie>
@@ -55,6 +57,10 @@ class MovieViewModel(var movieRepository: MovieRepository) : ViewModel() {
         )
     }
 
+    fun getMovieListFavorite(context: Context){
+        movieList.value = DataBase.getInstancia(context).getMovieFavorite() as ArrayList<Movie>
+    }
+
     override fun onCleared() {
         compositeDisposable.clear()
         super.onCleared()
@@ -63,7 +69,7 @@ class MovieViewModel(var movieRepository: MovieRepository) : ViewModel() {
     private fun listFilter(listSearchMovie: List<SearchMovie>): ArrayList<Movie>{
         var list = ArrayList<Movie>()
         listSearchMovie.forEach {
-            if(it.movie.image != null && !it.movie.name.isNullOrEmpty())
+            if(it.movie.name.isNotEmpty())
                 list.add(it.movie)
         }
         return list

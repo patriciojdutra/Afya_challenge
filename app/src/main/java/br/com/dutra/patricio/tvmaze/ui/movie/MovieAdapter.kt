@@ -14,6 +14,7 @@ import br.com.dutra.patricio.tvmaze.R
 import br.com.dutra.patricio.tvmaze.extensions.load
 import br.com.dutra.patricio.tvmaze.model.Movie
 import br.com.dutra.patricio.tvmaze.ui.moviedetails.MovieDetailsActivity
+import com.example.botacontra.banco.DataBase
 
 class MovieAdapter constructor(val contex: Context, var list: ArrayList<Movie>) : RecyclerView.Adapter<MovieAdapter.MovieHolder>() {
 
@@ -29,8 +30,7 @@ class MovieAdapter constructor(val contex: Context, var list: ArrayList<Movie>) 
         val item = list[position]
 
         holder.movie_image.load(
-                if(item.image != null)item.image.medium
-                else "",
+            item.image.medium,
                 contex)
 
         holder.txtTitleMovie.text = item.name
@@ -42,7 +42,7 @@ class MovieAdapter constructor(val contex: Context, var list: ArrayList<Movie>) 
 
         holder.movie_image.setOnClickListener {
 
-            var intent = Intent(contex, MovieDetailsActivity::class.java)
+            val intent = Intent(contex, MovieDetailsActivity::class.java)
             intent.putExtra("movie", item)
             contex.startActivity(intent)
 
@@ -50,10 +50,19 @@ class MovieAdapter constructor(val contex: Context, var list: ArrayList<Movie>) 
 
         holder.container_image_favorite.setOnClickListener {
             item.isFavorite = !item.isFavorite
-            if(item.isFavorite)
+            if(item.isFavorite) {
+
+                //item.image.id = item.id
+                //item.schedule?.id = item.id
+
+                DataBase.getInstancia(contex).insert(item)
+                //DataBase.getInstancia(contex).insert(item.image)
                 holder.movie_favorite.setImageResource(android.R.drawable.star_big_on)
-            else
+            } else {
+                DataBase.getInstancia(contex).delete(item)
+                //DataBase.getInstancia(contex).delete(item.image)
                 holder.movie_favorite.setImageResource(android.R.drawable.star_big_off)
+            }
         }
     }
 

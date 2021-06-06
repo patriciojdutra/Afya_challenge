@@ -13,10 +13,15 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.TvMaze">
-        <activity android:name=".ui.episode.EpisodeActivity"></activity>
+        <activity
+            android:name=".ui.episode.EpisodeActivity"
+            android:parentActivityName=".ui.moviedetails.MovieDetailsActivity">
+        </activity>
         <activity
             android:name=".ui.moviedetails.MovieDetailsActivity"
-            android:parentActivityName=".ui.movie.MovieListActivity"></activity>
+            android:launchMode="singleTop"
+            android:parentActivityName=".ui.movie.MovieListActivity">
+        </activity>
         <activity
             android:name=".ui.movie.MovieListActivity"
             android:launchMode="singleTop" />
