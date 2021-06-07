@@ -8,15 +8,14 @@ import br.com.dutra.patricio.tvmaze.data.repository.MovieRepository
 import br.com.dutra.patricio.tvmaze.extensions.addAllValue
 import br.com.dutra.patricio.tvmaze.model.Movie
 import br.com.dutra.patricio.tvmaze.model.SearchMovie
+import br.com.dutra.patricio.tvmaze.util.BaseViewModel
 import com.example.botacontra.banco.DataBase
 import io.reactivex.disposables.CompositeDisposable
 
-class MovieViewModel(var movieRepository: MovieRepository) : ViewModel() {
+class MovieViewModel(var movieRepository: MovieRepository) : BaseViewModel() {
 
-    var compositeDisposable = CompositeDisposable()
     var movieList = MutableLiveData<ArrayList<Movie>>()
-    var loading = MutableLiveData<Boolean>()
-    var errorMessage = MutableLiveData<String>()
+    var movieListFavorite = MutableLiveData<ArrayList<Movie>>()
     var pageSelected = 0
     var isFilter = false
 
@@ -26,7 +25,7 @@ class MovieViewModel(var movieRepository: MovieRepository) : ViewModel() {
                 pageSelected++
                 loading.value = true
             }.subscribe ({
-                var filterList = it.filter { movie -> movie.name.isNotEmpty() }
+                val filterList = it.filter { movie -> movie.name.isNotEmpty() }
                 if(isFilter){
                     isFilter = false
                     movieList.value = it as ArrayList<Movie>
@@ -45,7 +44,7 @@ class MovieViewModel(var movieRepository: MovieRepository) : ViewModel() {
 
         compositeDisposable.add(movieRepository.getSearchedMovieList(query)
                 .doOnSubscribe {
-                    searchMovieEnable()
+                    filterhMovieEnable()
                 }.subscribe ({
                     movieList.value = listFilter(it)
                     loading.value = false
@@ -57,17 +56,23 @@ class MovieViewModel(var movieRepository: MovieRepository) : ViewModel() {
         )
     }
 
-    fun getMovieListFavorite(context: Context){
-        movieList.value = DataBase.getInstancia(context).getMovieFavorite() as ArrayList<Movie>
-    }
-
-    override fun onCleared() {
-        compositeDisposable.clear()
-        super.onCleared()
+    fun getFavoriteMovies(context: Context){
+        compositeDisposable.add(movieRepository.getFavoriteMovies(context)
+            .doOnSubscribe {
+                filterhMovieEnable()
+            }.subscribe ({
+                    movieListFavorite.value = it as ArrayList<Movie>
+                    loading.value = false
+            },{
+                loading.value = false
+                if(it.message != null)
+                    errorMessage.value = it.message
+            })
+        )
     }
 
     private fun listFilter(listSearchMovie: List<SearchMovie>): ArrayList<Movie>{
-        var list = ArrayList<Movie>()
+        val list = ArrayList<Movie>()
         listSearchMovie.forEach {
             if(it.movie.name.isNotEmpty())
                 list.add(it.movie)
@@ -75,7 +80,7 @@ class MovieViewModel(var movieRepository: MovieRepository) : ViewModel() {
         return list
     }
 
-    private fun searchMovieEnable(){
+    private fun filterhMovieEnable(){
         pageSelected = 0
         isFilter = true
         loading.value = true

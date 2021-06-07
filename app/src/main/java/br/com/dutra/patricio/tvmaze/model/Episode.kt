@@ -4,7 +4,6 @@ import com.google.gson.annotations.SerializedName
 import java.io.Serializable
 
 data class Episode (
-
     @SerializedName("id") var id : Int,
     @SerializedName("url") var url : String,
     @SerializedName("name") var name : String,
@@ -15,10 +14,7 @@ data class Episode (
     @SerializedName("airtime") var airtime : String,
     @SerializedName("airstamp") var airstamp : String,
     @SerializedName("runtime") var runtime : Int,
-    @SerializedName("image") var image : Image,
+    @SerializedName("image") var image : Image?,
     @SerializedName("summary") var summary : String,
     var movieName : String
-
-
-
 ): Serializable

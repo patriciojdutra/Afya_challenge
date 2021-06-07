@@ -7,4 +7,19 @@
     <string name="search_people">Pesquisar pessoas</string>
     <string name="create_pin">Criar PIN</string>
     <string name="hint_searchview">O que deseja encontrar?</string>
+    <string name="hint_searchview_people">Que pessoa você deseja encontrar?</string>
+    <string name="authentication_was_successful">Authentication was successful</string>
+    <string name="loading_please_wait">Carregando, por favor aguarde!</string>
+    <string name="separator_text">\" - \"</string>
+    <string name="season">Temporada</string>
+    <string name="participations">Participações</string>
+    <string name="episode">Episódio</string>
+    <string name="summary">Resumo</string>
+    <string name="programation">Programação</string>
+    <string name="gender">Gêneros</string>
+    <string name="watch">Assistir</string>
+    <string name="authentication_failed">A autenticação falhou por um motivo desconhecido</string>
+    <string name="title_dialog_biometric">Tv Manze</string>
+    <string name="insert_digital">Insira sua digital para acessar o aplicativo!</string>
+    <string name="description_dialog_biometric">Este aplicativo usa autenticação biometrica</string>
 </resources>

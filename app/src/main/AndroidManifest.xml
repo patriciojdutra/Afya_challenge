@@ -14,6 +14,15 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.TvMaze">
         <activity
+            android:name=".ui.peopledetails.PeopleDetailsActivity"
+            android:parentActivityName=".ui.people.PeopleListActivity">
+        </activity>
+        <activity
+            android:name=".ui.people.PeopleListActivity"
+            android:launchMode="singleTop"
+            android:parentActivityName=".ui.movie.MovieListActivity">
+        </activity>
+        <activity
             android:name=".ui.episode.EpisodeActivity"
             android:parentActivityName=".ui.moviedetails.MovieDetailsActivity">
         </activity>

@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import br.com.dutra.patricio.tvmaze.ui.movie.MovieListActivity
 import br.com.dutra.patricio.tvmaze.util.BiometricUtil
+import br.com.dutra.patricio.tvmaze.util.Constants
 import br.com.dutra.patricio.tvmaze.util.PreferencesUtil
 
 class MainActivity : AppCompatActivity() {
@@ -12,7 +13,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        val authenticationEnable =PreferencesUtil.getBoolean(this,"Authentication_Enable",false)
+        val authenticationEnable = PreferencesUtil.getBoolean(this,Constants.authenticationIsEnable,false)
 
         if(authenticationEnable){
              val biometricUtil = BiometricUtil()
@@ -25,6 +26,5 @@ class MainActivity : AppCompatActivity() {
             startActivity(Intent(this, MovieListActivity::class.java))
             finish()
         }
-
     }
 }

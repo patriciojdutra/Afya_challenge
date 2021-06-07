@@ -1,19 +1,18 @@
 package br.com.dutra.patricio.tvmaze.util
 
-import android.app.Activity
 import android.content.Context
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.biometric.BiometricManager
 import androidx.biometric.BiometricPrompt
 import androidx.core.content.ContextCompat
+import br.com.dutra.patricio.tvmaze.R
 
 class BiometricUtil {
 
     private lateinit var biometricPrompt: BiometricPrompt
 
     fun startBiometricPrompt(act: AppCompatActivity, success: () -> Unit) {
-
         val executor = ContextCompat.getMainExecutor(act)
 
         val callback = object: BiometricPrompt.AuthenticationCallback() {
@@ -24,7 +23,7 @@ class BiometricUtil {
 
             override fun onAuthenticationFailed() {
                 super.onAuthenticationFailed()
-                Toast.makeText(act,"Authentication failed for an unknown reason",Toast.LENGTH_LONG).show()
+                Toast.makeText(act, act.getString(R.string.authentication_failed),Toast.LENGTH_LONG).show()
             }
 
             override fun onAuthenticationSucceeded(result: BiometricPrompt.AuthenticationResult) {
@@ -32,24 +31,21 @@ class BiometricUtil {
                 success()
             }
         }
-
         biometricPrompt = BiometricPrompt(act,executor,callback)
     }
 
     fun authenticate(context: Context){
         val biometricManager = BiometricManager.from(context)
         if (biometricManager.canAuthenticate() == BiometricManager.BIOMETRIC_SUCCESS){
-            biometricPrompt.authenticate(getPromptInfo())
-        }else{
-            Toast.makeText(context,"Não possui sensor biometrico", Toast.LENGTH_LONG).show()
+            biometricPrompt.authenticate(getPromptInfo(context))
         }
     }
 
-    private fun getPromptInfo(): BiometricPrompt.PromptInfo {
+    private fun getPromptInfo(context: Context): BiometricPrompt.PromptInfo {
         val promptInfo = BiometricPrompt.PromptInfo.Builder()
-            .setTitle("Tv Manze")
-            .setSubtitle("Insira sua digital para acessar o aplicativo!")
-            .setDescription("Este aplicativo usa autenticação biometrica")
+            .setTitle(context.getString(R.string.title_dialog_biometric))
+            .setSubtitle(context.getString(R.string.insert_digital))
+            .setDescription(context.getString(R.string.description_dialog_biometric))
             .setDeviceCredentialAllowed(true)
             .build()
         return promptInfo

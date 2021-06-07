@@ -5,18 +5,20 @@
 
     <item
         android:id="@+id/action_favorites"
-        android:icon="@android:drawable/btn_star_big_off"
+        android:icon="@drawable/ic_star_outline_grey600_24dp"
         android:title="@string/favorite_movie"
-        app:showAsAction="always" />
+        app:showAsAction="ifRoom" />
 
     <item
         android:id="@+id/action_search_people"
+        android:icon="@drawable/ic_account_search_grey600_24dp"
         android:title="@string/search_people"
-        app:showAsAction="never" />
+        app:showAsAction="ifRoom" />
 
     <item
         android:id="@+id/action_pin"
+        android:icon="@drawable/ic_lock_check_grey600_24dp"
         android:title="@string/create_pin"
-        app:showAsAction="never" />
+        app:showAsAction="ifRoom" />
 
 </menu>

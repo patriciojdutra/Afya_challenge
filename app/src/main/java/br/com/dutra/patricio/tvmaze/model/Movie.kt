@@ -8,7 +8,6 @@ import java.io.Serializable
 
 @Entity
 class Movie : Serializable {
-
     @PrimaryKey
     var id = 0
     var name = ""
@@ -16,10 +15,9 @@ class Movie : Serializable {
     @Embedded
     var schedule = Schedule()
     @Embedded
-    var image = Image()
+    var image: Image? = Image()
     var summary = ""
     var isFavorite = false
-
 }
 
 
