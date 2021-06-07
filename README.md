@@ -56,7 +56,10 @@ Esse é o URL da API: [https://www.tvmaze.com/api](https://www.tvmaze.com/api)
 #### Lista de favoritos.
 ![Gifs](https://github.com/patriciojdutra/Afya_challenge/blob/master/lista%20favoritos.gif?raw=true)
 
-#### Pesquisa de pessoa.
+#### Pesquisa por séries.
+![Gifs](https://github.com/patriciojdutra/Afya_challenge/blob/master/WhatsApp%20Video%202021-06-07%20at%2012.59.44%20(3).gif?raw=true)
+
+#### Pesquisa por pessoas.
 ![Gifs](https://github.com/patriciojdutra/Afya_challenge/blob/master/pesquisa%20pessoas.gif?raw=true)
 
 
